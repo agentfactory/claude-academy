@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Academy — Claude-First Strategy for SMB</title>
+  <meta name="description" content="Claude Academy helps small and medium business owners build Claude-powered systems. Practical. Powerful. Actionable.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset ─────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0A0A0A;
+      color: #F5F0E8;
+      overflow-x: hidden;
+      padding-bottom: 68px; /* room for sticky banner */
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    svg { display: block; flex-shrink: 0; }
+
+    /* ── Icons ──────────────────────────────── */
+    .icon { display: inline-flex; align-items: center; justify-content: center; }
+
+    /* ── Buttons ─────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: 'Inter', sans-serif; cursor: pointer; border: none;
+      transition: opacity .2s, transform .15s;
+    }
+    .btn:hover { opacity: .88; transform: translateY(-1px); }
+    .btn-orange {
+      background: #D4682A; color: #fff;
+      font-size: 13px; font-weight: 600; letter-spacing: 1px;
+      padding: 14px 32px;
+    }
+    .btn-orange-sm {
+      background: #D4682A; color: #fff;
+      font-size: 12px; font-weight: 600; letter-spacing: 1px;
+      padding: 12px 24px;
+    }
+    .btn-teal-sm {
+      background: #5A8A85; color: #fff;
+      font-size: 12px; font-weight: 600; letter-spacing: 1px;
+      padding: 12px 24px;
+    }
+
+    /* ── Header ──────────────────────────────── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: #0A0A0A;
+      height: 80px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 80px;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px; font-weight: 400;
+      letter-spacing: 3px; color: #F5F0E8;
+      text-transform: uppercase;
+    }
+    nav { display: flex; align-items: center; gap: 36px; }
+    nav a {
+      font-size: 12px; color: #888; letter-spacing: 1px;
+      text-transform: uppercase; transition: color .2s;
+    }
+    nav a:hover { color: #F5F0E8; }
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+    .social-icon { color: #888; transition: color .2s; }
+    .social-icon:hover { color: #D4682A; }
+    .book-btn {
+      background: #D4682A; color: #fff;
+      font-size: 11px; font-weight: 600; letter-spacing: 1px;
+      padding: 10px 20px; cursor: pointer;
+      border: none; font-family: 'Inter', sans-serif;
+      transition: opacity .2s;
+    }
+    .book-btn:hover { opacity: .88; }
+
+    /* ── Hero ─────────────────────────────────── */
+    .hero {
+      background: #111111;
+      padding: 80px 80px 0 80px;
+      display: flex; flex-direction: column;
+    }
+    .hero-type { position: relative; }
+    .hero-type .claude-word {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(100px, 14.6vw, 210px);
+      font-style: italic; font-weight: 400;
+      color: #D4682A; letter-spacing: -5px;
+      line-height: .88; display: block;
+    }
+    .hero-type .academy-word {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(95px, 13.9vw, 200px);
+      font-weight: 700;
+      color: #F5F0E8; letter-spacing: -5px;
+      line-height: .85; display: block;
+    }
+    .hero-photo {
+      width: 100%; height: 280px;
+      overflow: hidden; margin-top: 0;
+      position: relative;
+    }
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+    .hero-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 32px 0 64px 0;
+    }
+    .hero-sub {
+      font-size: 11px; color: #555; letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ── Section shared ─────────────────────── */
+    .split-section {
+      display: flex; width: 100%;
+    }
+    .split-img { flex-shrink: 0; overflow: hidden; }
+    .split-content {
+      display: flex; flex-direction: column; justify-content: center;
+      gap: 28px; padding: 80px; flex: 1;
+    }
+    .label-row {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .label-bar { width: 3px; flex-shrink: 0; }
+    .section-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    .section-h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400; line-height: 1.1;
+    }
+    .section-body {
+      font-size: 14px; color: #888; line-height: 1.7;
+    }
+    .accent-bar { height: 3px; margin-bottom: 4px; }
+
+    /* ── Intro / About Teaser ─────────────────── */
+    .intro { background: #1A1A1A; height: 680px; }
+    .intro .split-img { width: 540px; height: 680px; }
+    .intro .section-h2 { font-size: clamp(28px, 3.2vw, 46px); color: #F5F0E8; }
+    .intro .split-content { gap: 28px; }
+
+    /* ── Services ───────────────────────────── */
+    .svc { height: 560px; }
+    .svc-1 { background: #111111; }
+    .svc-2 { background: #161616; flex-direction: row-reverse; }
+    .svc-3 { background: #111111; }
+    .svc .split-img { width: 640px; height: 560px; }
+    .svc-2 .split-img { width: 600px; }
+    .svc .section-h2 { font-size: clamp(28px, 3.6vw, 52px); color: #F5F0E8; }
+
+    /* ── About ──────────────────────────────── */
+    .about { background: #0D0D0D; height: 680px; }
+    .about .split-img { width: 600px; height: 680px; }
+    .about-pull {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(18px, 2vw, 28px);
+      font-style: italic; font-weight: 400;
+      color: #D4682A; line-height: 1.4;
+    }
+    .about-divider { width: 48px; height: 2px; background: #D4682A; }
+    .about-body { font-size: 15px; color: #888; line-height: 1.8; }
+
+    /* ── Testimonials ───────────────────────── */
+    .testimonials {
+      background: #1A1A1A;
+      height: 580px;
+      display: flex; align-items: center;
+      gap: 56px; padding: 80px;
+    }
+    .testimonials-photo { width: 420px; height: 420px; flex-shrink: 0; overflow: hidden; }
+    .testimonials-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .testi-cards {
+      display: flex; flex-direction: column; gap: 16px; flex: 1;
+    }
+    .testi-card {
+      padding: 28px;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .testi-card:nth-child(1) { background: #222222; }
+    .testi-card:nth-child(2) { background: #1E1E1E; outline: 1px solid #D4682A; }
+    .testi-card:nth-child(3) { background: #222222; }
+    .testi-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px; font-style: italic; font-weight: 400;
+      color: #F5F0E8; line-height: 1.55;
+    }
+    .testi-name { font-size: 11px; color: #555; letter-spacing: 1px; }
+
+    /* ── Marquee ────────────────────────────── */
+    .marquee-bar {
+      background: #151515; height: 48px;
+      overflow: hidden; position: relative;
+      display: flex; align-items: center;
+    }
+    .marquee-inner {
+      display: flex; gap: 48px;
+      animation: marquee 20s linear infinite;
+      white-space: nowrap;
+    }
+    .marquee-inner span {
+      font-size: 11px; font-weight: 600; letter-spacing: 3px;
+      color: #2E2E2E; text-transform: uppercase; flex-shrink: 0;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── Freebie ────────────────────────────── */
+    .freebie {
+      background: #0D0D0D;
+      padding: 80px;
+      display: flex; flex-direction: column; gap: 48px;
+    }
+    .freebie-inner {
+      display: flex; align-items: center; gap: 80px;
+    }
+    .freebie-text {
+      flex: 1;
+      display: flex; flex-direction: column; gap: 24px;
+    }
+    .freebie-h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3.1vw, 44px);
+      font-weight: 400; color: #D4682A; line-height: 1.1;
+    }
+    .freebie-sub {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; font-style: italic; color: #F5F0E8;
+    }
+    .freebie-body { font-size: 14px; color: #888; line-height: 1.7; }
+    .freebie-img {
+      width: 420px; height: 320px; flex-shrink: 0;
+      overflow: hidden; outline: 1px solid #2A2A2A;
+    }
+    .freebie-img img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ── Blog ──────────────────────────────── */
+    .blog {
+      background: #1A1A1A;
+      padding: 80px;
+      display: flex; gap: 72px; align-items: flex-start;
+    }
+    .blog-left { width: 360px; flex-shrink: 0; display: flex; flex-direction: column; gap: 20px; }
+    .blog-h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 3.9vw, 56px);
+      font-weight: 700; letter-spacing: -1px; line-height: 1;
+      color: #F5F0E8;
+    }
+    .blog-desc { font-size: 14px; color: #888; line-height: 1.7; width: 360px; }
+    .blog-posts { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+    .blog-post {
+      display: flex; align-items: center; gap: 32px;
+      padding: 32px 40px;
+    }
+    .blog-post:nth-child(1), .blog-post:nth-child(3) { background: #111111; }
+    .blog-post:nth-child(2) { background: #161616; }
+    .post-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 40px; font-style: italic; font-weight: 400;
+      color: #D4682A; line-height: 1; flex-shrink: 0;
+    }
+    .post-col { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+    .post-title { font-size: 15px; font-weight: 600; color: #F5F0E8; line-height: 1.4; }
+    .post-link { font-size: 12px; color: #D4682A; letter-spacing: 1px; }
+
+    /* ── Closing CTA ─────────────────────────── */
+    .closing-cta {
+      background: #0D0D0D;
+      padding: 100px 80px;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 28px;
+      text-align: center;
+    }
+    .cta-h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 4.2vw, 60px);
+      font-weight: 400; color: #F5F0E8; line-height: 1.05;
+      max-width: 900px;
+    }
+    .cta-sub {
+      font-size: 16px; color: #666; line-height: 1.6; max-width: 700px;
+    }
+    .cta-divider { width: 48px; height: 1px; background: #2A2A2A; }
+    .cta-body {
+      font-size: 15px; color: #555; line-height: 1.75; max-width: 680px;
+    }
+    .cta-big-btn {
+      background: #D4682A; color: #fff;
+      font-size: 14px; font-weight: 700; letter-spacing: 2px;
+      padding: 20px 64px; border: none; cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: opacity .2s, transform .15s;
+    }
+    .cta-big-btn:hover { opacity: .88; transform: translateY(-1px); }
+
+    /* ── Footer ─────────────────────────────── */
+    footer {
+      background: #0A0A0A;
+      padding: 64px 80px;
+      display: flex; flex-direction: column; gap: 48px;
+    }
+    .footer-top {
+      display: flex; justify-content: space-between; gap: 40px;
+    }
+    .footer-nav-title, .footer-contact-title {
+      font-size: 10px; font-weight: 600; letter-spacing: 3px;
+      color: #444; text-transform: uppercase; margin-bottom: 12px;
+    }
+    .footer-nav-links {
+      font-size: 13px; color: #555; line-height: 1.9;
+    }
+    .footer-brand {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 20px; flex: 1; text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; font-weight: 400; letter-spacing: 3px; color: #F5F0E8;
+    }
+    .footer-socials { display: flex; gap: 24px; }
+    .footer-social { color: #444; transition: color .2s; }
+    .footer-social:hover { color: #D4682A; }
+    .footer-contact { width: 260px; }
+    .footer-contact p { font-size: 13px; color: #555; line-height: 1.9; }
+    .footer-contact a { color: #D4682A; }
+    .footer-divider { width: 100%; height: 1px; background: #1E1E1E; }
+    .footer-tagline {
+      display: flex; justify-content: center; gap: 32px;
+      font-size: 11px; color: #333; letter-spacing: 2px;
+    }
+
+    /* ── Sticky Bottom Banner ───────────────── */
+    .sticky-banner {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 99;
+      height: 68px;
+      background: #D4682A;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 80px;
+    }
+    .banner-txt {
+      font-size: 14px; font-weight: 500; color: #fff; letter-spacing: .5px;
+    }
+    .banner-btn {
+      background: #fff; color: #D4682A;
+      font-size: 12px; font-weight: 700; letter-spacing: 1px;
+      padding: 12px 28px; border: none; cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: opacity .2s;
+    }
+    .banner-btn:hover { opacity: .88; }
+
+    /* ── Popup Modal ─────────────────────────── */
+    .popup-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(13,13,13,.88);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity .25s;
+    }
+    .popup-overlay.active { opacity: 1; pointer-events: all; }
+    .popup-card {
+      background: #F5F0E8;
+      width: 100%; max-width: 560px;
+      padding: 44px 52px;
+      display: flex; flex-direction: column; gap: 20px;
+      transform: translateY(12px);
+      transition: transform .25s;
+      position: relative;
+    }
+    .popup-overlay.active .popup-card { transform: translateY(0); }
+    .popup-header {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .popup-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 3px;
+      color: #D4682A; text-transform: uppercase;
+    }
+    .popup-close {
+      width: 28px; height: 28px;
+      background: #E8E1D5; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .popup-close:hover { background: #D9D0C4; }
+    .popup-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px; font-weight: 400; color: #1A1A1A; line-height: 1.15;
+    }
+    .popup-subtitle { font-size: 14px; color: #555; line-height: 1.7; }
+    .popup-divider { width: 100%; height: 1px; background: #D9D0C4; }
+    .popup-fields { display: flex; flex-direction: column; gap: 12px; }
+    .field-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 2px;
+      color: #888; text-transform: uppercase; margin-bottom: 4px;
+      display: block;
+    }
+    .field-input {
+      width: 100%; height: 48px;
+      background: #fff; border: 1px solid #D9D0C4;
+      padding: 0 16px;
+      font-family: 'Inter', sans-serif; font-size: 14px; color: #1A1A1A;
+      outline: none; transition: border-color .2s;
+    }
+    .field-input::placeholder { color: #C0B8AE; }
+    .field-input:focus { border-color: #D4682A; }
+    .popup-submit {
+      width: 100%; height: 52px;
+      background: #D4682A; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px; font-weight: 700; letter-spacing: 1px; color: #fff;
+      transition: opacity .2s, transform .15s;
+    }
+    .popup-submit:hover { opacity: .88; transform: translateY(-1px); }
+    .popup-footer {
+      font-size: 12px; color: #999; text-align: center; line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── HEADER ─────────────────────────────── -->
+<header>
+  <div class="logo">Claude Academy</div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#work-with-me" class="work-with-me-trigger">Work With Me</a>
+    <a href="#blog">Blog</a>
+  </nav>
+  <div class="nav-right">
+    <a href="https://linkedin.com" class="social-icon" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <a href="https://youtube.com" class="social-icon" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+    </a>
+    <button class="book-btn work-with-me-trigger">Book a Call</button>
+  </div>
+</header>
+
+<!-- ─── HERO ──────────────────────────────── -->
+<section class="hero" id="hero">
+  <div class="hero-type">
+    <span class="claude-word">Claude</span>
+    <span class="academy-word">Academy</span>
+  </div>
+  <div class="hero-photo">
+    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1440&q=80" alt="Conference audience" loading="lazy">
+  </div>
+  <div class="hero-bottom">
+    <span class="hero-sub">Claude Authority for SMB &nbsp;·&nbsp; Practical. Powerful. Actionable.</span>
+    <button class="btn btn-orange work-with-me-trigger">
+      Work with me
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ─── INTRO / ABOUT TEASER ──────────────── -->
+<section class="split-section intro" id="about">
+  <div class="split-img">
+    <img src="images/denis1.jpg" alt="Denis Laflamme" loading="lazy">
+  </div>
+  <div class="split-content">
+    <div class="label-row">
+      <div class="label-bar" style="background:#D4682A; height:14px;"></div>
+      <span class="section-label" style="color:#D4682A;">Hi, I'm Denis</span>
+    </div>
+    <h2 class="section-h2" style="font-size:clamp(28px,3.2vw,46px); color:#F5F0E8;">Your SMB shouldn't have to figure out Claude alone.</h2>
+    <p class="section-body">I help small and medium business owners turn Claude from a curiosity into their most valuable team member. Not with generic AI tips — with real Claude-powered systems built around how YOUR business actually runs. Whether you're drowning in admin, struggling to systematize what's in your head, or just staring at Claude thinking 'now what?' — I've been there, I've built the systems, and I'll show you exactly what works.</p>
+    <button class="btn btn-orange work-with-me-trigger">
+      Meet Your First AI Agent
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ─── SERVICE 1 — WORKSHOP ──────────────── -->
+<section class="split-section svc svc-1" id="services">
+  <div class="split-img" style="width:640px;">
+    <img src="https://images.unsplash.com/photo-1676277755961-0e27d80dfe1c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080" alt="Workshop" loading="lazy">
+  </div>
+  <div class="split-content">
+    <div class="accent-bar" style="background:#5A8A85;"></div>
+    <span class="section-label" style="color:#5A8A85;">Claude Implementation Workshop</span>
+    <h2 class="section-h2" style="font-size:clamp(26px,3.1vw,44px); color:#F5F0E8;">Build Your First Claude Agent Team</h2>
+    <p class="section-body">A hands-on, high-impact workshop where you'll design and deploy your first set of Claude-powered agents — for content, operations, client delivery, and more. Stop guessing what prompts to write. Start building AI systems that actually think like you and work without you.</p>
+    <button class="btn btn-teal-sm work-with-me-trigger">
+      Learn More
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ─── SERVICE 2 — CONSULTING ────────────── -->
+<section class="split-section svc svc-2">
+  <div class="split-content">
+    <div class="accent-bar" style="background:#D4682A;"></div>
+    <span class="section-label" style="color:#D4682A;">Claude-First Consulting</span>
+    <h2 class="section-h2" style="font-size:clamp(26px,3.6vw,52px); color:#F5F0E8;">The SMB Claude Stack</h2>
+    <p class="section-body">A 90-minute Claude-first strategy session where we map your business operations and identify exactly where Claude agents can save you 10+ hours per week. This isn't a generic AI overview — it's a surgical assessment of YOUR workflows, YOUR bottlenecks, and YOUR opportunities using Claude's unique capabilities.</p>
+    <button class="btn btn-orange-sm work-with-me-trigger">
+      Learn More
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+  </div>
+  <div class="split-img" style="width:600px;">
+    <img src="https://images.unsplash.com/photo-1644317167952-d46ed578e0a7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080" alt="Consulting strategy" loading="lazy">
+  </div>
+</section>
+
+<!-- ─── SERVICE 3 — SPEAKING ──────────────── -->
+<section class="split-section svc svc-3">
+  <div class="split-img" style="width:640px;">
+    <img src="https://images.unsplash.com/photo-1582192904915-d89c7250b235?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080" alt="Denis speaking" loading="lazy">
+  </div>
+  <div class="split-content">
+    <div class="accent-bar" style="background:#D4682A;"></div>
+    <span class="section-label" style="color:#D4682A;">Speaking + Training</span>
+    <h2 class="section-h2" style="font-size:clamp(26px,3.6vw,52px); color:#F5F0E8;">Online + In Person</h2>
+    <p class="section-body">Keynotes, team trainings, and executive sessions for SMBs and organizations who want to see what's possible when Claude meets real business operations. Known for making AI feel practical, powerful, and immediately actionable — not intimidating.</p>
+    <button class="btn btn-orange-sm work-with-me-trigger">
+      Book Denis
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ─── ABOUT ──────────────────────────────── -->
+<section class="split-section about">
+  <div class="split-img" style="width:600px;">
+    <img src="images/Portrait_01.jpg" alt="Denis Laflamme portrait" loading="lazy">
+  </div>
+  <div class="split-content" style="gap:32px;">
+    <p class="about-pull">"Claude specialist meets business systems thinker — with real operator experience and zero hype."</p>
+    <div class="about-divider"></div>
+    <p class="about-body">I'm Denis Laflamme, and I help SMB owners and their teams build smarter, leaner, more profitable businesses through Claude-first consulting, workshops, and systems strategy. Whether it's turning your SOPs into intelligent Claude agents, your client intake into automated workflows, or your expertise into a scalable AI system — I help you leverage Claude to amplify what already works.<br><br>You don't need to become a prompt engineer. You need Claude systems built around how you already operate.</p>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ──────────────────────── -->
+<section class="testimonials">
+  <div class="testimonials-photo">
+    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&q=80" alt="Team meeting" loading="lazy">
+  </div>
+  <div class="testi-cards">
+    <div class="testi-card">
+      <p class="testi-quote">"Denis showed us exactly how to use Claude for our business — not just theory, actual working systems we use every day."</p>
+      <p class="testi-name">— SMB Owner, Professional Services</p>
+    </div>
+    <div class="testi-card">
+      <p class="testi-quote">"Finally someone who speaks business, not just AI. Denis helped us save 15+ hours a week with Claude agents."</p>
+      <p class="testi-name">— Marketing Director, Boutique Agency</p>
+    </div>
+    <div class="testi-card">
+      <p class="testi-quote">"The workshop was a game-changer. We walked in confused about AI and walked out with three working Claude agents."</p>
+      <p class="testi-name">— Operations Manager, Regional SMB</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MARQUEE ────────────────────────────── -->
+<div class="marquee-bar">
+  <div class="marquee-inner">
+    <span>FREE RESOURCE</span><span>·</span>
+    <span>FREE RESOURCE</span><span>·</span>
+    <span>FREE RESOURCE</span><span>·</span>
+    <span>FREE RESOURCE</span><span>·</span>
+    <span>FREE RESOURCE</span><span>·</span>
+    <span>FREE RESOURCE</span><span>·</span>
+    <span>FREE RESOURCE</span><span>·</span>
+    <span>FREE RESOURCE</span><span>·</span>
+    <span>FREE RESOURCE</span><span>·</span>
+    <span>FREE RESOURCE</span><span>·</span>
+  </div>
+</div>
+
+<!-- ─── FREEBIE ────────────────────────────── -->
+<section class="freebie" id="free-resource">
+  <div class="freebie-inner">
+    <div class="freebie-text">
+      <h2 class="freebie-h2">Still wondering what Claude can actually do for YOUR business?</h2>
+      <p class="freebie-sub">Let Claude show you where to start.</p>
+      <p class="freebie-body">Take the free SMB AI Readiness Assessment — a Claude-powered tool that identifies your biggest automation opportunities and tells you exactly which Claude agent to build first.</p>
+      <button class="btn btn-orange" style="align-self:flex-start;">
+        Take the Assessment
+      </button>
+    </div>
+    <div class="freebie-img">
+      <img src="images/generated-1774541454084.png" alt="SMB AI Readiness Assessment" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ─── BLOG ──────────────────────────────── -->
+<section class="blog" id="blog">
+  <div class="blog-left">
+    <h2 class="blog-h2">Latest On The Blog</h2>
+    <p class="blog-desc">Frameworks, builds, and behind-the-scenes looks at how I use Claude to run businesses. Practical. No fluff. Always actionable.</p>
+  </div>
+  <div class="blog-posts">
+    <div class="blog-post">
+      <span class="post-num">01</span>
+      <div class="post-col">
+        <p class="post-title">Why Claude is the Best AI for Small Business (And It's Not Even Close)</p>
+        <a href="#" class="post-link">Read here →</a>
+      </div>
+    </div>
+    <div class="blog-post">
+      <span class="post-num">02</span>
+      <div class="post-col">
+        <p class="post-title">5 Claude Agents Every SMB Should Build This Quarter</p>
+        <a href="#" class="post-link">Read here →</a>
+      </div>
+    </div>
+    <div class="blog-post">
+      <span class="post-num">03</span>
+      <div class="post-col">
+        <p class="post-title">Stop Using ChatGPT Like Google — Here's How Claude Actually Transforms Operations</p>
+        <a href="#" class="post-link">Read here →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CLOSING CTA ───────────────────────── -->
+<section class="closing-cta">
+  <h2 class="cta-h2">Claude can't replace you — but it can finally support you.</h2>
+  <p class="cta-sub">Claude Academy was built for business owners who want results, not hype.</p>
+  <div class="cta-divider"></div>
+  <p class="cta-body">This isn't about chasing the latest AI trend. It's Claude-first consulting for SMBs who want to work smarter, serve clients better, and stop holding everything together with willpower alone. If your ideas, processes, or systems are trapped in your head — it's time to build Claude agents that think like you.</p>
+  <button class="cta-big-btn work-with-me-trigger">I'M IN!</button>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────── -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <p class="footer-nav-title">Navigation</p>
+      <div class="footer-nav-links">
+        <a href="#hero" style="color:#555;">Home</a> &nbsp;·&nbsp;
+        <a href="#about" style="color:#555;">About</a> &nbsp;·&nbsp;
+        <a href="#services" style="color:#555;">Services</a><br>
+        <a href="#work-with-me" class="work-with-me-trigger" style="color:#555;">Work with Me</a> &nbsp;·&nbsp;
+        <a href="#blog" style="color:#555;">Blog</a> &nbsp;·&nbsp;
+        <a href="mailto:denis@claudeacademy.ai" style="color:#555;">Contact</a>
+      </div>
+    </div>
+    <div class="footer-brand">
+      <span class="footer-logo">Claude Academy</span>
+      <div class="footer-socials">
+        <a href="https://linkedin.com" class="footer-social" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="https://youtube.com" class="footer-social" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-contact">
+      <p class="footer-contact-title">Contact</p>
+      <p><a href="mailto:denis@claudeacademy.ai">denis@claudeacademy.ai</a></p>
+      <p><a href="https://claudeacademy.ai" style="color:#D4682A;">claudeacademy.ai</a></p>
+    </div>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-tagline">
+    <span>Claude-First Strategy</span>
+    <span>·</span>
+    <span>Built for SMB</span>
+    <span>·</span>
+    <span>No Hype. Just Results.</span>
+  </div>
+</footer>
+
+<!-- ─── STICKY BOTTOM BANNER ──────────────── -->
+<div class="sticky-banner">
+  <span class="banner-txt">Ready to put Claude to work for your business? Find out how →</span>
+  <button class="banner-btn work-with-me-trigger">Book a Call</button>
+</div>
+
+<!-- ─── CONSULTATION POPUP ────────────────── -->
+<div class="popup-overlay" id="consultationPopup" role="dialog" aria-modal="true" aria-labelledby="popupHeading">
+  <div class="popup-card">
+    <div class="popup-header">
+      <span class="popup-label">Free Consultation</span>
+      <button class="popup-close" id="popupClose" aria-label="Close">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <h2 class="popup-heading" id="popupHeading">Let's Talk Claude Strategy</h2>
+    <p class="popup-subtitle">Book a free 30-minute call to find out exactly where Claude can save you time, cut costs, and scale your business — starting this week.</p>
+    <div class="popup-divider"></div>
+    <form class="popup-fields" id="consultForm" novalidate>
+      <div>
+        <label class="field-label" for="firstName">First Name</label>
+        <input class="field-input" type="text" id="firstName" name="firstName" placeholder="Your first name" required autocomplete="given-name">
+      </div>
+      <div>
+        <label class="field-label" for="workEmail">Work Email</label>
+        <input class="field-input" type="email" id="workEmail" name="workEmail" placeholder="your@company.com" required autocomplete="email">
+      </div>
+    </form>
+    <button class="popup-submit" id="popupSubmit">
+      Book My Free 30-Min Call
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+    <p class="popup-footer">No commitment. Just a real conversation about your business and how Claude can help.</p>
+  </div>
+</div>
+
+<script>
+  const overlay = document.getElementById('consultationPopup');
+  const closeBtn = document.getElementById('popupClose');
+  const submitBtn = document.getElementById('popupSubmit');
+  const form = document.getElementById('consultForm');
+
+  function openPopup() {
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('firstName').focus();
+  }
+
+  function closePopup() {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // All "Work With Me" triggers
+  document.querySelectorAll('.work-with-me-trigger').forEach(el => {
+    el.addEventListener('click', e => { e.preventDefault(); openPopup(); });
+  });
+
+  closeBtn.addEventListener('click', closePopup);
+
+  // Close on overlay click
+  overlay.addEventListener('click', e => { if (e.target === overlay) closePopup(); });
+
+  // Close on Escape
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePopup(); });
+
+  // Submit → validate → redirect to Cal.com
+  submitBtn.addEventListener('click', () => {
+    const firstName = document.getElementById('firstName').value.trim();
+    const email = document.getElementById('workEmail').value.trim();
+
+    if (!firstName) {
+      document.getElementById('firstName').focus();
+      document.getElementById('firstName').style.borderColor = '#D4682A';
+      return;
+    }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      document.getElementById('workEmail').focus();
+      document.getElementById('workEmail').style.borderColor = '#D4682A';
+      return;
+    }
+
+    // Build Cal.com URL with prefilled name/email
+    const calUrl = new URL('https://cal.com/theagentfactory/disco');
+    calUrl.searchParams.set('name', firstName);
+    calUrl.searchParams.set('email', email);
+
+    window.open(calUrl.toString(), '_blank');
+    closePopup();
+  });
+
+  // Reset input error highlight on change
+  ['firstName','workEmail'].forEach(id => {
+    document.getElementById(id).addEventListener('input', function() {
+      this.style.borderColor = '';
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,24 +1,24 @@
 ---
 name: plan-week
-description: Generate a full weekly content plan for social media. Use when user wants to plan a week of content, create a content calendar, batch-schedule posts, or generate multiple posts from a single source (topic, YouTube video, article, etc.) across Twitter, LinkedIn, Instagram, and Facebook.
+description: Generate a full weekly content plan across all social platforms. Use when user wants to plan a week of content, create a content calendar, batch-schedule posts, or generate multiple posts from a single source. Accepts a topic, YouTube URL (even 2+ hour videos), list of topics, or mixed inputs.
 user-invocable: true
 argument-hint: [topic or URL]
 allowed-tools: Bash, Read, Write, Edit, Glob, Grep, WebFetch, WebSearch, Agent
 ---
 
-# /plan-week — Weekly Content Planner & Scheduler
+# /plan-week — Weekly Content Plan Generator
 
-Generate a complete week of social media content from a single source, review it, then batch-schedule across all platforms.
+Generate a full week of social media content from a single source, review it, then schedule everything in parallel.
 
 ## Arguments
 
-- `$ARGUMENTS` — A topic, YouTube URL, TikTok URL, article URL, list of topics, or mixed inputs
+- `$ARGUMENTS` — A topic, URL, list of topics, or mixed inputs to generate a week of content from
 
 ## Quick Reference
 
 ```
-/plan-week "AI productivity tips for small businesses"
-/plan-week https://youtube.com/watch?v=abc123
+/plan-week "How AI is transforming small businesses"
+/plan-week https://youtube.com/watch?v=...
 /plan-week "Topic 1, Topic 2, Topic 3"
 ```
 
@@ -32,15 +32,15 @@ Generate a complete week of social media content from a single source, review it
 - **Total posts per week**: 20 (5 days x 4 platforms)
 - **Visuals**: 5 whiteboard infographics (1 per weekday, shared across platforms)
 - **Scheduling**: Always use `useNextFreeSlot: true` (never publish immediately)
-- **Content approach**: Extract source material → generate 10 unique angles → select 5 best for weekdays
+- **Content approach**: Extract source material → generate 10 unique angles → select best 5 for weekdays
 
 ---
 
 ## STEP 1: Extract Source Content
 
-Detect input type and extract content using the same logic as the `/post` skill.
+Same as `/post` skill — detect input type and extract content:
 
-For URL inputs:
+### For URLs:
 
 ```bash
 curl -s -X POST "https://backend.blotato.com/v2/source-resolutions-v3" \
@@ -54,7 +54,7 @@ curl -s -X POST "https://backend.blotato.com/v2/source-resolutions-v3" \
   }'
 ```
 
-For topic-based inputs, use Perplexity research:
+### For topics needing research:
 
 ```bash
 curl -s -X POST "https://backend.blotato.com/v2/source-resolutions-v3" \
@@ -68,9 +68,9 @@ curl -s -X POST "https://backend.blotato.com/v2/source-resolutions-v3" \
   }'
 ```
 
-Poll for completion (same pattern as `/post` skill — check status, wait 3s, retry up to 20 times).
+Poll for results at `GET /v2/source-resolutions-v3/<sourceId>` until status is `"completed"`.
 
-For long-form videos (2+ hours), the transcript may be very long. Chunk it into logical sections for angle generation.
+For **long-form content** (2+ hour YouTube videos): the transcript may be very long. Chunk it into logical sections (by topic shifts, timestamps, or natural breaks) before generating angles.
 
 ---
 
@@ -79,44 +79,44 @@ For long-form videos (2+ hours), the transcript may be very long. Chunk it into 
 From the extracted source material, generate **10 unique content angles**. Each angle should be:
 
 - A distinct perspective, insight, or takeaway from the source
-- Standalone — doesn't require context from other angles
-- Suitable for social media (not too academic or complex)
-- Varied in type: mix of tips, stories, contrarian takes, frameworks, questions, statistics
+- Different enough from other angles to avoid repetitive content
+- Suitable for social media (not too broad, not too niche)
 
-Present all 10 angles to the user in a numbered list with a one-line description each.
+Angle types to mix:
+1. **Contrarian take** — challenges a common belief from the source
+2. **How-to / tactical** — specific actionable steps from the source
+3. **Story / anecdote** — a narrative element from the source
+4. **Data / stat highlight** — a surprising number or finding
+5. **Framework / model** — a mental model or framework presented
+6. **Quote / key insight** — a powerful one-liner or concept
+7. **Mistake / anti-pattern** — what NOT to do
+8. **Comparison** — before/after, old way/new way
+9. **Prediction / trend** — forward-looking insight
+10. **Personal reflection** — opinion or experience tied to the source
 
----
-
-## STEP 3: Select 5 Best Angles for the Week
-
-From the 10 angles, select the **5 strongest** for Monday through Friday. Consider:
-
-- Variety across the week (don't cluster similar themes)
-- Start the week strong (Monday = most compelling angle)
-- End the week with an engagement-driving angle (Friday = question or discussion)
-- Mid-week = educational/tactical content
-
----
-
-## STEP 4: Generate Full Post Drafts
-
-For each of the 5 selected angles, generate **one post per platform** (4 platforms x 5 days = 20 posts total).
-
-Apply the brand voice rules from the `/post` skill:
-- **Twitter**: Alex Hormozi style (punchy, 280 chars max)
-- **LinkedIn**: Justin Welsh style (story-driven, structured)
-- **Instagram**: Visual-first caption, hooks, hashtags
-- **Facebook**: Conversational, community-oriented
-
-Apply the humanize AI writing rules (no em dashes, no filler, natural tone).
+Select the **best 5 angles** for the 5 weekdays.
 
 ---
 
-## STEP 5: Generate 5 Visuals
+## STEP 3: Generate Post Drafts
 
-Create one whiteboard infographic per weekday using Blotato's visual creation API.
+For each of the 5 selected angles, generate full post copy for ALL 4 platforms:
+- **Twitter** — Apply Alex Hormozi voice (see brand voice in /post skill)
+- **LinkedIn** — Apply Justin Welsh voice
+- **Instagram** — Visual-first caption style
+- **Facebook** — Conversational, community-oriented
 
-### List templates first:
+This produces 20 total post drafts (5 angles x 4 platforms).
+
+Apply ALL humanize AI writing rules from the /post skill.
+
+---
+
+## STEP 4: Generate Visuals
+
+Create **5 whiteboard infographic visuals** (one per weekday). Each visual corresponds to that day's angle/theme and will be shared across all 4 platforms for that day.
+
+### List templates:
 
 ```bash
 curl -s "https://backend.blotato.com/v2/videos/templates" \
@@ -130,19 +130,19 @@ curl -s -X POST "https://backend.blotato.com/v2/videos/from-templates" \
   -H "blotato-api-key: $BLOTATO_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "templateId": "<whiteboard_infographic_template_id>",
-    "prompt": "<description based on the day angle/content>",
+    "templateId": "<whiteboard_infographic_template_uuid>",
+    "prompt": "<description based on day angle/theme>",
     "render": true
   }'
 ```
 
-Poll for each visual's completion. Rate limit is 1/min, so space out creation requests.
+Poll each at `GET /v2/videos/creations/<videoId>` until status is `"done"`.
 
-The same visual URL is shared across all platform posts for that day.
+**Rate limit**: 1 visual creation per minute. Space requests accordingly.
 
 ---
 
-## STEP 6: Save Content Plan
+## STEP 5: Output Content Plan
 
 Write the complete plan to `content-plan.md` in the project root.
 
@@ -151,103 +151,122 @@ Write the complete plan to `content-plan.md` in the project root.
 ```markdown
 # Weekly Content Plan
 
-**Source**: [input topic or URL]
+**Source**: [input topic/URL]
 **Generated**: [date]
-**Period**: [Monday date] - [Friday date]
-**Status**: DRAFT — Awaiting Review
+**Status**: DRAFT - Awaiting Review
 
 ---
 
-## Monday — [Angle Title]
+## Monday — [Angle/Theme Title]
 
-**Theme**: [one-line description of the angle]
-**Visual**: [visual URL or "pending"]
+**Visual**: [visual_url or "generating..."]
 
 ### Twitter
-> [full tweet text]
+[Full tweet text]
 
-**Characters**: [count]/280 | **Status**: draft
+**Status**: draft
 
 ### LinkedIn
-> [full LinkedIn post]
+[Full LinkedIn post]
 
-**Characters**: [count]/3000 | **Status**: draft
+**Status**: draft
 
 ### Instagram
-> [full Instagram caption]
+[Full Instagram caption]
 
-**Characters**: [count]/2200 | **Status**: draft
+**Status**: draft
 
 ### Facebook
-> [full Facebook post]
+[Full Facebook post]
 
-**Characters**: [count]/63206 | **Status**: draft
-
----
-
-## Tuesday — [Angle Title]
-
-[same structure...]
+**Status**: draft
 
 ---
 
-[...Wednesday, Thursday, Friday...]
+## Tuesday — [Angle/Theme Title]
+
+[Same structure...]
+
+---
+
+[Continue for Wednesday, Thursday, Friday]
+
+---
+
+## Summary
+
+| Day | Angle | Visual | Twitter | LinkedIn | Instagram | Facebook |
+|-----|-------|--------|---------|----------|-----------|----------|
+| Mon | [theme] | [url] | draft | draft | draft | draft |
+| Tue | [theme] | [url] | draft | draft | draft | draft |
+| Wed | [theme] | [url] | draft | draft | draft | draft |
+| Thu | [theme] | [url] | draft | draft | draft | draft |
+| Fri | [theme] | [url] | draft | draft | draft | draft |
 ```
 
 ---
 
-## STEP 7: Human Review
+## STEP 6: Human Review
 
-After saving `content-plan.md`:
+After generating the plan:
 
-1. Tell the user: "Your weekly content plan is ready in `content-plan.md`. Please review it."
-2. Explain they can:
-   - Edit the file directly in VS Code
-   - Select specific sections and ask you to rewrite them
-   - Ask you to regenerate a specific day or platform
-   - Change angles, swap days, adjust tone
-3. **Wait for the user to type "approve"** (or similar confirmation) before proceeding
-4. Do NOT auto-schedule. Do NOT proceed without explicit approval.
+1. Tell the user: "Your weekly content plan is ready in `content-plan.md`. Review it in your editor, make any edits you'd like, then type **approve** to schedule all posts."
+2. **STOP and wait for the user to respond.**
+3. The user may:
+   - Type **"approve"** → proceed to Step 7 (schedule all)
+   - Select specific lines and ask Claude to rewrite them → update `content-plan.md` and wait again
+   - Ask for a specific day/platform to be regenerated → regenerate and update
+   - Ask for changes to tone, angle, or visual → apply changes and update
+4. Only proceed to scheduling after explicit approval.
 
 ---
 
-## STEP 8: Batch Schedule (After Approval)
+## STEP 7: Batch Schedule (After Approval)
 
-Once approved, schedule all 20 posts using parallel sub-agents.
+Once the user approves, schedule all 20 posts using **parallel sub-agents**.
 
-### Get connected accounts:
+### Get Connected Accounts
 
 ```bash
 curl -s "https://backend.blotato.com/v2/users/me/accounts" \
   -H "blotato-api-key: $BLOTATO_API_KEY"
 ```
 
-### Spawn sub-agents for parallel scheduling:
+### Spawn Sub-Agents
 
 Launch **one Agent per platform** (4 agents total). Each agent schedules 5 posts (Mon-Fri) for its platform.
 
 Agent prompt template:
 
 ```
-You are scheduling 5 social media posts for [PLATFORM] using the Blotato API.
+You are scheduling 5 social media posts to [PLATFORM] for the week.
 
-API base: https://backend.blotato.com/v2
+Blotato API key is available as $BLOTATO_API_KEY.
+Base URL: https://backend.blotato.com/v2
 Auth header: blotato-api-key: $BLOTATO_API_KEY
 Account ID: [accountId]
-Page ID: [pageId if Facebook]
+[If Facebook: Page ID: pageId]
 
-Schedule each post using useNextFreeSlot: true. The posts fill the pre-configured
-calendar slots in order.
+Schedule each post using useNextFreeSlot: true.
 
 Posts to schedule:
 
-1. Monday: [post text] | Media: [visual_url]
-2. Tuesday: [post text] | Media: [visual_url]
-3. Wednesday: [post text] | Media: [visual_url]
-4. Thursday: [post text] | Media: [visual_url]
-5. Friday: [post text] | Media: [visual_url]
+Monday: [post text]
+Visual: [media_url]
 
-For each post, make this API call:
+Tuesday: [post text]
+Visual: [media_url]
+
+Wednesday: [post text]
+Visual: [media_url]
+
+Thursday: [post text]
+Visual: [media_url]
+
+Friday: [post text]
+Visual: [media_url]
+
+For each post, make this curl call:
 
 curl -s -X POST "https://backend.blotato.com/v2/posts" \
   -H "blotato-api-key: $BLOTATO_API_KEY" \
@@ -267,46 +286,41 @@ curl -s -X POST "https://backend.blotato.com/v2/posts" \
     }
   }'
 
-After each successful publish, log it to post-log.md.
-Wait for each post to be confirmed before scheduling the next.
-Report back the scheduled times for all 5 posts.
+After each successful post, poll GET /v2/posts/<postSubmissionId> to confirm.
+Then append a row to post-log.md.
+
+Report back with the status of all 5 posts.
 ```
 
-### After all agents complete:
+### After All Agents Complete
 
-1. Update `content-plan.md` — change all statuses from "draft" to "scheduled"
-2. Update the header status to "SCHEDULED"
-3. Report summary to user: dates, times, platforms, and any errors
-
----
-
-## STEP 9: Log All Posts
-
-Each sub-agent logs to `post-log.md` (same format as `/post` skill):
-
-```markdown
-| <date> | <platform> | <first 50 chars>... | <visual_url> | scheduled | <post_url> |
-```
+1. Update `content-plan.md` — change status of each post from "draft" to "scheduled"
+2. Report summary to user: how many posts scheduled, any failures, next steps
 
 ---
 
 ## SAFETY RULES
 
-1. **NEVER schedule without explicit user approval** — always wait for "approve"
-2. **ALWAYS use `useNextFreeSlot: true`** — never publish immediately
-3. **Show the full plan** in `content-plan.md` before scheduling
-4. **Rate limit awareness**: visual creation is 1/min, post publishing is 30/min
-5. **Log every post** to `post-log.md`
-6. The pre-publish hook (`validate-post.sh`) runs automatically on all publish calls
+1. **NEVER schedule without explicit user approval** ("approve" or similar)
+2. **Always use `useNextFreeSlot: true`** — never publish immediately
+3. **Show the full plan first** — user must see all 20 posts before anything is scheduled
+4. **Rate limit visual creation** — max 1 per minute
+5. **Log every scheduled post** to `post-log.md`
 
 ---
 
-## BLOTATO CALENDAR SLOTS
+## BLOTATO API REFERENCE
 
-Before using `/plan-week`, ensure posting slots are configured in Blotato:
-- Go to Calendar > Weekly Schedule > Add Slot
-- Add a daily slot per platform (e.g., Mon-Fri at 10:00 AM for each platform)
-- `useNextFreeSlot: true` fills these slots in chronological order
-- If no slots are configured, posts will fail to schedule
+See the `/post` skill for full API endpoint documentation.
 
-Remind the user to set up slots if they haven't already.
+**Key endpoints for /plan-week**:
+- `POST /v2/source-resolutions-v3` — extract content
+- `GET /v2/source-resolutions-v3/:id` — poll extraction status
+- `POST /v2/videos/from-templates` — create visuals
+- `GET /v2/videos/creations/:id` — poll visual status
+- `GET /v2/users/me/accounts` — list connected accounts
+- `POST /v2/posts` — schedule posts (with `useNextFreeSlot: true`)
+- `GET /v2/posts/:id` — poll post status
+
+**Base URL**: `https://backend.blotato.com/v2`
+**Auth Header**: `blotato-api-key: $BLOTATO_API_KEY`

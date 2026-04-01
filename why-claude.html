@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why Claude? An Honest Look at AI Platforms — Claude Academy</title>
+  <meta name="description" content="Picking an AI platform is a foundation decision for your personal operating system. Claude prioritizes persistent context, not just chat responses.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset ─────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0A0A0A;
+      color: #F5F0E8;
+      overflow-x: hidden;
+      padding-bottom: 68px;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    svg { display: block; flex-shrink: 0; }
+
+    /* ── Buttons ─────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: 'Inter', sans-serif; cursor: pointer; border: none;
+      transition: opacity .2s, transform .15s;
+    }
+    .btn:hover { opacity: .88; transform: translateY(-1px); }
+    .btn-orange {
+      background: #D4682A; color: #fff;
+      font-size: 13px; font-weight: 600; letter-spacing: 1px;
+      padding: 14px 32px;
+    }
+
+    /* ── Header ──────────────────────────────── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: #0A0A0A;
+      height: 80px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 80px;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px; font-weight: 400;
+      letter-spacing: 3px; color: #F5F0E8;
+      text-transform: uppercase;
+    }
+    nav { display: flex; align-items: center; gap: 36px; }
+    nav a {
+      font-size: 12px; color: #888; letter-spacing: 1px;
+      text-transform: uppercase; transition: color .2s;
+    }
+    nav a:hover { color: #F5F0E8; }
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+    .social-icon { color: #888; transition: color .2s; }
+    .social-icon:hover { color: #D4682A; }
+    .book-btn {
+      background: #D4682A; color: #fff;
+      font-size: 11px; font-weight: 600; letter-spacing: 1px;
+      padding: 10px 20px; cursor: pointer;
+      border: none; font-family: 'Inter', sans-serif;
+      transition: opacity .2s;
+    }
+    .book-btn:hover { opacity: .88; }
+
+    /* ── Article Hero ────────────────────────── */
+    .article-hero {
+      background: #111111;
+      padding: 100px 80px 80px;
+    }
+    .article-hero-inner {
+      max-width: 860px;
+      display: flex; flex-direction: column; gap: 24px;
+    }
+    .article-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 3px;
+      color: #D4682A; text-transform: uppercase;
+    }
+    .article-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 4.5vw, 64px);
+      font-weight: 400; color: #F5F0E8; line-height: 1.08;
+    }
+    .article-subtitle {
+      font-size: 16px; color: #888; line-height: 1.7; max-width: 620px;
+    }
+    .article-divider {
+      width: 100%; height: 3px; background: #D4682A; margin-top: 16px;
+    }
+
+    /* ── Article Sections ────────────────────── */
+    .article-section {
+      padding: 80px;
+    }
+    .article-container {
+      max-width: 860px;
+      display: flex; flex-direction: column; gap: 32px;
+    }
+    .section-label-row {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-label-row .bar {
+      width: 3px; height: 14px; background: #D4682A; flex-shrink: 0;
+    }
+    .section-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 3px;
+      text-transform: uppercase; color: #D4682A;
+    }
+    .article-blockquote {
+      background: #1A1A1A;
+      padding: 40px 48px;
+      font-size: 16px; color: #888; line-height: 1.8;
+    }
+    .hl-orange { color: #D4682A; font-weight: 600; }
+    .hl-teal { color: #5A8A85; font-weight: 600; }
+
+    /* ── Feature Cards ───────────────────────── */
+    .feature-cards {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    .feature-card {
+      background: #1A1A1A;
+      border: 1px solid #2A2A2A;
+      padding: 36px 28px;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .feature-icon {
+      width: 48px; height: 48px;
+      background: rgba(90,138,133,.15);
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 6px;
+    }
+    .feature-icon svg { color: #5A8A85; }
+    .feature-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; font-weight: 400; color: #F5F0E8;
+    }
+    .feature-card p { font-size: 14px; color: #888; line-height: 1.7; }
+
+    /* ── Comparison Grid ─────────────────────── */
+    .comparison-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    }
+    .comparison-col {
+      background: #111111;
+      border: 1px solid #2A2A2A;
+      padding: 40px 32px;
+      display: flex; flex-direction: column; gap: 20px;
+    }
+    .comparison-badge {
+      display: inline-block;
+      font-size: 9px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; padding: 6px 14px;
+      align-self: flex-start;
+    }
+    .comparison-col.platform .comparison-badge {
+      background: rgba(212,104,42,.15); color: #D4682A;
+    }
+    .comparison-col.tool .comparison-badge {
+      background: rgba(90,138,133,.15); color: #5A8A85;
+    }
+    .comparison-col h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px; font-weight: 400; color: #F5F0E8;
+    }
+    .comparison-col .desc {
+      font-size: 14px; color: #888; line-height: 1.7;
+    }
+    .comparison-col ul {
+      list-style: none; display: flex; flex-direction: column; gap: 10px;
+    }
+    .comparison-col ul li {
+      font-size: 14px; color: #888; padding-left: 18px; position: relative;
+    }
+    .comparison-col.platform ul li::before {
+      content: ''; position: absolute; left: 0; top: 8px;
+      width: 6px; height: 6px; border-radius: 50%; background: #D4682A;
+    }
+    .comparison-col.tool ul li::before {
+      content: ''; position: absolute; left: 0; top: 8px;
+      width: 6px; height: 6px; border-radius: 50%; background: #5A8A85;
+    }
+
+    /* ── Pull Quote ──────────────────────────── */
+    .pullquote-section {
+      background: #0D0D0D;
+      padding: 80px;
+    }
+    .pullquote-inner {
+      max-width: 860px;
+      border-left: 3px solid #D4682A;
+      padding-left: 32px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .pullquote-text {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(20px, 2.2vw, 28px);
+      font-style: italic; font-weight: 400;
+      color: #F5F0E8; line-height: 1.45;
+    }
+    .pullquote-attr {
+      font-size: 12px; font-weight: 600; color: #D4682A;
+      letter-spacing: 1px;
+    }
+    .section-divider {
+      width: 100%; height: 1px; background: #D4682A; opacity: .3;
+    }
+
+    /* ── Footer ─────────────────────────────── */
+    footer {
+      background: #0A0A0A;
+      padding: 64px 80px;
+      display: flex; flex-direction: column; gap: 48px;
+    }
+    .footer-top {
+      display: flex; justify-content: space-between; gap: 40px;
+    }
+    .footer-nav-title, .footer-contact-title {
+      font-size: 10px; font-weight: 600; letter-spacing: 3px;
+      color: #444; text-transform: uppercase; margin-bottom: 12px;
+    }
+    .footer-nav-links { font-size: 13px; color: #555; line-height: 1.9; }
+    .footer-brand {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 20px; flex: 1; text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; font-weight: 400; letter-spacing: 3px; color: #F5F0E8;
+    }
+    .footer-socials { display: flex; gap: 24px; }
+    .footer-social { color: #444; transition: color .2s; }
+    .footer-social:hover { color: #D4682A; }
+    .footer-contact { width: 260px; }
+    .footer-contact p { font-size: 13px; color: #555; line-height: 1.9; }
+    .footer-contact a { color: #D4682A; }
+    .footer-divider { width: 100%; height: 1px; background: #1E1E1E; }
+    .footer-tagline {
+      display: flex; justify-content: center; gap: 32px;
+      font-size: 11px; color: #333; letter-spacing: 2px;
+    }
+
+    /* ── Sticky Bottom Banner ───────────────── */
+    .sticky-banner {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 99;
+      height: 68px; background: #D4682A;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 80px;
+    }
+    .banner-txt { font-size: 14px; font-weight: 500; color: #fff; letter-spacing: .5px; }
+    .banner-btn {
+      background: #fff; color: #D4682A;
+      font-size: 12px; font-weight: 700; letter-spacing: 1px;
+      padding: 12px 28px; border: none; cursor: pointer;
+      font-family: 'Inter', sans-serif; transition: opacity .2s;
+    }
+    .banner-btn:hover { opacity: .88; }
+
+    /* ── Popup Modal ─────────────────────────── */
+    .popup-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(13,13,13,.88);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity .25s;
+    }
+    .popup-overlay.active { opacity: 1; pointer-events: all; }
+    .popup-card {
+      background: #F5F0E8;
+      width: 100%; max-width: 560px;
+      padding: 44px 52px;
+      display: flex; flex-direction: column; gap: 20px;
+      transform: translateY(12px); transition: transform .25s;
+      position: relative;
+    }
+    .popup-overlay.active .popup-card { transform: translateY(0); }
+    .popup-header { display: flex; align-items: center; justify-content: space-between; }
+    .popup-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 3px;
+      color: #D4682A; text-transform: uppercase;
+    }
+    .popup-close {
+      width: 28px; height: 28px;
+      background: #E8E1D5; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .popup-close:hover { background: #D9D0C4; }
+    .popup-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px; font-weight: 400; color: #1A1A1A; line-height: 1.15;
+    }
+    .popup-subtitle { font-size: 14px; color: #555; line-height: 1.7; }
+    .popup-divider { width: 100%; height: 1px; background: #D9D0C4; }
+    .popup-fields { display: flex; flex-direction: column; gap: 12px; }
+    .field-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 2px;
+      color: #888; text-transform: uppercase; margin-bottom: 4px; display: block;
+    }
+    .field-input {
+      width: 100%; height: 48px;
+      background: #fff; border: 1px solid #D9D0C4;
+      padding: 0 16px;
+      font-family: 'Inter', sans-serif; font-size: 14px; color: #1A1A1A;
+      outline: none; transition: border-color .2s;
+    }
+    .field-input::placeholder { color: #C0B8AE; }
+    .field-input:focus { border-color: #D4682A; }
+    .popup-submit {
+      width: 100%; height: 52px;
+      background: #D4682A; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px; font-weight: 700; letter-spacing: 1px; color: #fff;
+      transition: opacity .2s, transform .15s;
+    }
+    .popup-submit:hover { opacity: .88; transform: translateY(-1px); }
+    .popup-footer { font-size: 12px; color: #999; text-align: center; line-height: 1.5; }
+
+    /* ── Responsive ──────────────────────────── */
+    @media (max-width: 768px) {
+      header { padding: 0 24px; }
+      .article-hero { padding: 60px 24px 48px; }
+      .article-section { padding: 48px 24px; }
+      .feature-cards { grid-template-columns: 1fr; }
+      .comparison-grid { grid-template-columns: 1fr; }
+      .pullquote-section { padding: 48px 24px; }
+      footer { padding: 48px 24px; }
+      .sticky-banner { padding: 0 24px; }
+      .footer-top { flex-direction: column; align-items: center; text-align: center; }
+      nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── HEADER ─────────────────────────────── -->
+<header>
+  <a href="/" class="logo">Claude Academy</a>
+  <nav>
+    <a href="/#about">About</a>
+    <a href="/#services">Services</a>
+    <a href="/#work-with-me" class="work-with-me-trigger">Work With Me</a>
+    <a href="/#blog">Blog</a>
+  </nav>
+  <div class="nav-right">
+    <a href="https://linkedin.com" class="social-icon" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <a href="https://youtube.com" class="social-icon" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+    </a>
+    <button class="book-btn work-with-me-trigger">Book a Call</button>
+  </div>
+</header>
+
+<!-- ─── ARTICLE HERO ─────────────────────────── -->
+<section class="article-hero">
+  <div class="article-hero-inner">
+    <span class="article-label">Claude Academy</span>
+    <h1 class="article-title">Why Claude? An Honest Look at AI Platforms</h1>
+    <p class="article-subtitle">Picking an AI platform is a foundation decision for your personal operating system. Claude prioritizes persistent context, not just chat responses.</p>
+  </div>
+  <div class="article-divider"></div>
+</section>
+
+<!-- ─── THE FOUNDATION DECISION ──────────────── -->
+<section class="article-section" style="background:#0D0D0D;">
+  <div class="article-container">
+    <div class="section-label-row">
+      <div class="bar"></div>
+      <span class="section-label">The Foundation Decision</span>
+    </div>
+    <div class="article-blockquote">
+      Choosing an AI platform is like choosing your <span class="hl-orange">operating system</span>, not your favorite app. You build everything on top of it. Switching later costs time, context, and momentum. Claude is the best foundation because it treats every conversation as part of a <span class="hl-teal">larger system</span> you are building over time.
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHAT SETS CLAUDE APART ───────────────── -->
+<section class="article-section" style="background:#111111;">
+  <div class="article-container">
+    <div class="section-label-row">
+      <div class="bar"></div>
+      <span class="section-label">What Sets Claude Apart</span>
+    </div>
+    <div class="feature-cards">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="7" y1="16" x2="13" y2="16"/></svg>
+        </div>
+        <h3>Persistent Context</h3>
+        <p>Projects, memory, and custom instructions that carry across every conversation. No more re-explaining who you are.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>Long-Form Thinking</h3>
+        <p>Handles complex reasoning, long documents, and nuanced tasks where quick answers are not enough.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3>Extensibility</h3>
+        <p>Connectors, plugins, MCPs, and Code mode. Claude grows with your skill level instead of boxing you in.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PLATFORM VS. TOOL ────────────────────── -->
+<section class="article-section" style="background:#1A1A1A;">
+  <div class="article-container">
+    <div class="section-label-row">
+      <div class="bar"></div>
+      <span class="section-label">Platform vs. Tool</span>
+    </div>
+    <div class="comparison-grid">
+      <div class="comparison-col platform">
+        <span class="comparison-badge">Platform Mindset</span>
+        <h3>Claude as Your OS</h3>
+        <p class="desc">You build workflows, store context, and extend capabilities over time. Every session adds value to the next one.</p>
+        <ul>
+          <li>Persistent memory across sessions</li>
+          <li>Projects with custom instructions</li>
+          <li>Skills, connectors, and MCPs</li>
+          <li>Desktop app with file access</li>
+        </ul>
+      </div>
+      <div class="comparison-col tool">
+        <span class="comparison-badge">Tool Mindset</span>
+        <h3>AI as a Search Bar</h3>
+        <p class="desc">You ask one-off questions. Every conversation starts from scratch. No compounding value over time.</p>
+        <ul>
+          <li>No memory between sessions</li>
+          <li>Same generic setup each time</li>
+          <li>Copy and paste everything manually</li>
+          <li>Stuck in the browser tab</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PULL QUOTE ───────────────────────────── -->
+<section class="pullquote-section">
+  <div class="section-divider" style="margin-bottom:80px;"></div>
+  <div class="pullquote-inner">
+    <p class="pullquote-text">"The best AI platform is the one you build on top of. Claude is designed for that."</p>
+    <span class="pullquote-attr">Personal OS Principle</span>
+  </div>
+  <div class="section-divider" style="margin-top:80px;"></div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────── -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <p class="footer-nav-title">Navigation</p>
+      <div class="footer-nav-links">
+        <a href="/" style="color:#555;">Home</a> &nbsp;·&nbsp;
+        <a href="/#about" style="color:#555;">About</a> &nbsp;·&nbsp;
+        <a href="/#services" style="color:#555;">Services</a><br>
+        <a href="/#work-with-me" class="work-with-me-trigger" style="color:#555;">Work with Me</a> &nbsp;·&nbsp;
+        <a href="/#blog" style="color:#555;">Blog</a> &nbsp;·&nbsp;
+        <a href="mailto:denis@claudeacademy.ai" style="color:#555;">Contact</a>
+      </div>
+    </div>
+    <div class="footer-brand">
+      <span class="footer-logo">Claude Academy</span>
+      <div class="footer-socials">
+        <a href="https://linkedin.com" class="footer-social" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="https://youtube.com" class="footer-social" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.4 19.54C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-contact">
+      <p class="footer-contact-title">Contact</p>
+      <p><a href="mailto:denis@claudeacademy.ai">denis@claudeacademy.ai</a></p>
+      <p><a href="https://claudeacademy.ai" style="color:#D4682A;">claudeacademy.ai</a></p>
+    </div>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-tagline">
+    <span>Claude-First Strategy</span>
+    <span>·</span>
+    <span>Built for SMB</span>
+    <span>·</span>
+    <span>No Hype. Just Results.</span>
+  </div>
+</footer>
+
+<!-- ─── STICKY BOTTOM BANNER ──────────────── -->
+<div class="sticky-banner">
+  <span class="banner-txt">Ready to put Claude to work for your business? Find out how →</span>
+  <button class="banner-btn work-with-me-trigger">Book a Call</button>
+</div>
+
+<!-- ─── CONSULTATION POPUP ────────────────── -->
+<div class="popup-overlay" id="consultationPopup" role="dialog" aria-modal="true" aria-labelledby="popupHeading">
+  <div class="popup-card">
+    <div class="popup-header">
+      <span class="popup-label">Free Consultation</span>
+      <button class="popup-close" id="popupClose" aria-label="Close">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <h2 class="popup-heading" id="popupHeading">Let's Talk Claude Strategy</h2>
+    <p class="popup-subtitle">Book a free 30-minute call to find out exactly where Claude can save you time, cut costs, and scale your business — starting this week.</p>
+    <div class="popup-divider"></div>
+    <form class="popup-fields" id="consultForm" novalidate>
+      <div>
+        <label class="field-label" for="firstName">First Name</label>
+        <input class="field-input" type="text" id="firstName" name="firstName" placeholder="Your first name" required autocomplete="given-name">
+      </div>
+      <div>
+        <label class="field-label" for="workEmail">Work Email</label>
+        <input class="field-input" type="email" id="workEmail" name="workEmail" placeholder="your@company.com" required autocomplete="email">
+      </div>
+    </form>
+    <button class="popup-submit" id="popupSubmit">
+      Book My Free 30-Min Call
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+    <p class="popup-footer">No commitment. Just a real conversation about your business and how Claude can help.</p>
+  </div>
+</div>
+
+<script>
+  const overlay = document.getElementById('consultationPopup');
+  const closeBtn = document.getElementById('popupClose');
+  const submitBtn = document.getElementById('popupSubmit');
+  const form = document.getElementById('consultForm');
+
+  function openPopup() {
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('firstName').focus();
+  }
+
+  function closePopup() {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.work-with-me-trigger').forEach(el => {
+    el.addEventListener('click', e => { e.preventDefault(); openPopup(); });
+  });
+
+  closeBtn.addEventListener('click', closePopup);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closePopup(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePopup(); });
+
+  submitBtn.addEventListener('click', () => {
+    const firstName = document.getElementById('firstName').value.trim();
+    const email = document.getElementById('workEmail').value.trim();
+
+    if (!firstName) {
+      document.getElementById('firstName').focus();
+      document.getElementById('firstName').style.borderColor = '#D4682A';
+      return;
+    }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      document.getElementById('workEmail').focus();
+      document.getElementById('workEmail').style.borderColor = '#D4682A';
+      return;
+    }
+
+    const calUrl = new URL('https://cal.com/theagentfactory/disco');
+    calUrl.searchParams.set('name', firstName);
+    calUrl.searchParams.set('email', email);
+
+    window.open(calUrl.toString(), '_blank');
+    closePopup();
+  });
+
+  ['firstName','workEmail'].forEach(id => {
+    document.getElementById(id).addEventListener('input', function() {
+      this.style.borderColor = '';
+    });
+  });
+</script>
+</body>
+</html>

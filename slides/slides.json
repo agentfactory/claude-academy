@@ -1,0 +1,79 @@
+[
+  {
+    "id": "01",
+    "filename": "slide-01",
+    "seriesLabel": "Claude Mastery for Professionals",
+    "title": "Why Claude? An Honest Look at AI Platforms",
+    "subtitle": "Picking an AI platform is a foundation decision for your personal operating system. Claude prioritizes persistent context, not just chat responses.",
+    "sections": [
+      {
+        "type": "section-header",
+        "label": "The Foundation Decision"
+      },
+      {
+        "type": "text-box",
+        "content": "Choosing an AI platform is like choosing your <span class=\"highlight\">operating system</span>, not your favorite app. You build everything on top of it. Switching later costs time, context, and momentum. Claude is the best foundation because it treats every conversation as part of a <span class=\"highlight-teal\">larger system</span> you are building over time."
+      },
+      {
+        "type": "section-header",
+        "label": "What Sets Claude Apart"
+      },
+      {
+        "type": "card-grid",
+        "cards": [
+          {
+            "icon": "document",
+            "title": "Persistent Context",
+            "desc": "Projects, memory, and custom instructions that carry across every conversation. No more re-explaining who you are."
+          },
+          {
+            "icon": "clock",
+            "title": "Long-Form Thinking",
+            "desc": "Handles complex reasoning, long documents, and nuanced tasks where quick answers are not enough."
+          },
+          {
+            "icon": "layers",
+            "title": "Extensibility",
+            "desc": "Connectors, plugins, MCPs, and Code mode. Claude grows with your skill level instead of boxing you in."
+          }
+        ]
+      },
+      {
+        "type": "section-header",
+        "label": "Platform vs. Tool"
+      },
+      {
+        "type": "comparison",
+        "left": {
+          "badge": "Platform Mindset",
+          "badgeStyle": "orange",
+          "title": "Claude as Your OS",
+          "desc": "You build workflows, store context, and extend capabilities over time. Every session adds value to the next one.",
+          "items": [
+            "Persistent memory across sessions",
+            "Projects with custom instructions",
+            "Skills, connectors, and MCPs",
+            "Desktop app with file access"
+          ]
+        },
+        "right": {
+          "badge": "Tool Mindset",
+          "badgeStyle": "teal",
+          "title": "AI as a Search Bar",
+          "desc": "You ask one-off questions. Every conversation starts from scratch. No compounding value over time.",
+          "items": [
+            "No memory between sessions",
+            "Same generic setup each time",
+            "Copy and paste everything manually",
+            "Stuck in the browser tab"
+          ]
+        }
+      },
+      {
+        "type": "quote",
+        "text": "\"The best AI platform is the one you build on top of. Claude is designed for that.\"",
+        "attribution": "Personal OS Principle"
+      }
+    ]
+  }
+]

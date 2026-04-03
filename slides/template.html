@@ -42,14 +42,15 @@
       font-style: italic;
       src: url('fonts/playfair-display-latin-400-italic.woff2') format('woff2');
     }
+
     /* ── Reset ─────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
       width: 1080px;
       min-height: 1350px;
       font-family: 'Inter', sans-serif;
-      background: #0A0A0A;
-      color: #F5F0E8;
+      background: #EDE7DD;
+      color: #1A1714;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -87,7 +88,7 @@
       font-size: 48px;
       font-weight: 400;
       line-height: 1.15;
-      color: #F5F0E8;
+      color: #1A1714;
       max-width: 800px;
     }
 
@@ -97,7 +98,7 @@
       font-size: 18px;
       font-weight: 400;
       line-height: 1.6;
-      color: #888;
+      color: #6B635A;
       max-width: 700px;
     }
 
@@ -120,33 +121,33 @@
       font-weight: 600;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: #888;
+      color: #8A8279;
       white-space: nowrap;
     }
     .section-header-line {
       flex: 1;
       height: 1px;
-      background: #2A2A2A;
+      background: #D5CCBF;
     }
 
     /* ── Text Box ──────────────────────────── */
     .text-box {
-      background: #111111;
-      border: 1px solid #2A2A2A;
+      background: #F7F3ED;
+      border: 1px solid #D5CCBF;
       border-radius: 8px;
       padding: 28px 32px;
     }
     .text-box p {
       font-size: 17px;
       line-height: 1.7;
-      color: #C8C2B8;
+      color: #3D362E;
     }
     .text-box .highlight {
       color: #D4682A;
       font-weight: 500;
     }
     .text-box .highlight-teal {
-      color: #5A8A85;
+      color: #3D7A74;
       font-weight: 500;
     }
 
@@ -171,8 +172,8 @@
       flex: 0 0 calc(50% - 10px);
     }
     .card {
-      background: #111111;
-      border: 1px solid #2A2A2A;
+      background: #F7F3ED;
+      border: 1px solid #D5CCBF;
       border-radius: 8px;
       padding: 24px 22px;
       display: -webkit-flex;
@@ -189,8 +190,8 @@
     .card-icon {
       width: 48px;
       height: 48px;
-      background: #161616;
-      border: 1px solid #2A2A2A;
+      background: #EDE7DD;
+      border: 1px solid #D5CCBF;
       border-radius: 10px;
       display: flex;
       align-items: center;
@@ -199,18 +200,18 @@
     .card-icon svg {
       width: 24px;
       height: 24px;
-      color: #5A8A85;
+      color: #3D7A74;
     }
     .card-title {
       font-family: 'Playfair Display', serif;
       font-size: 20px;
       font-weight: 400;
-      color: #F5F0E8;
+      color: #1A1714;
     }
     .card-desc {
       font-size: 14px;
       line-height: 1.6;
-      color: #888;
+      color: #6B635A;
     }
 
     /* ── Comparison Layout (flexbox for compat) ── */
@@ -224,8 +225,8 @@
     .comparison-panel {
       -webkit-flex: 1;
       flex: 1;
-      background: #111111;
-      border: 1px solid #2A2A2A;
+      background: #F7F3ED;
+      border: 1px solid #D5CCBF;
       border-radius: 8px;
       padding: 28px 26px;
       display: -webkit-flex;
@@ -237,7 +238,7 @@
       border-top: 3px solid #D4682A;
     }
     .comparison-panel.right {
-      border-top: 3px solid #5A8A85;
+      border-top: 3px solid #3D7A74;
     }
     .comparison-panel > * {
       margin-bottom: 14px;
@@ -256,23 +257,23 @@
       width: fit-content;
     }
     .panel-badge.orange {
-      background: rgba(212, 104, 42, 0.15);
+      background: rgba(212, 104, 42, 0.12);
       color: #D4682A;
     }
     .panel-badge.teal {
-      background: rgba(90, 138, 133, 0.15);
-      color: #5A8A85;
+      background: rgba(61, 122, 116, 0.12);
+      color: #3D7A74;
     }
     .panel-title {
       font-family: 'Playfair Display', serif;
       font-size: 24px;
       font-weight: 400;
-      color: #F5F0E8;
+      color: #1A1714;
     }
     .panel-desc {
       font-size: 14px;
       line-height: 1.6;
-      color: #888;
+      color: #6B635A;
     }
     .panel-list {
       list-style: none;
@@ -283,7 +284,7 @@
     .panel-list li {
       font-size: 14px;
       line-height: 1.5;
-      color: #C8C2B8;
+      color: #3D362E;
       padding-left: 20px;
       position: relative;
     }
@@ -300,7 +301,7 @@
       background: #D4682A;
     }
     .comparison-panel.right .panel-list li::before {
-      background: #5A8A85;
+      background: #3D7A74;
     }
 
     /* ── Bullet List ───────────────────────── */
@@ -313,7 +314,7 @@
     .bullet-list li {
       font-size: 16px;
       line-height: 1.6;
-      color: #C8C2B8;
+      color: #3D362E;
       padding-left: 24px;
       position: relative;
     }
@@ -339,7 +340,7 @@
     .numbered-list li {
       font-size: 16px;
       line-height: 1.6;
-      color: #C8C2B8;
+      color: #3D362E;
       padding-left: 40px;
       position: relative;
       counter-increment: item;
@@ -352,7 +353,7 @@
       width: 28px;
       height: 28px;
       border-radius: 50%;
-      background: rgba(212, 104, 42, 0.15);
+      background: rgba(212, 104, 42, 0.12);
       color: #D4682A;
       font-size: 13px;
       font-weight: 700;
@@ -363,7 +364,7 @@
 
     /* ── Quote Block ───────────────────────── */
     .quote-block {
-      background: #111111;
+      background: #F7F3ED;
       border-left: 4px solid #D4682A;
       padding: 24px 28px;
       border-radius: 0 8px 8px 0;
@@ -373,7 +374,7 @@
       font-size: 20px;
       font-style: italic;
       line-height: 1.5;
-      color: #F5F0E8;
+      color: #1A1714;
     }
     .quote-attribution {
       margin-top: 16px;
@@ -387,27 +388,27 @@
     .slide-table {
       width: 100%;
       border-collapse: collapse;
-      background: #111111;
+      background: #F7F3ED;
       border-radius: 8px;
       overflow: hidden;
-      border: 1px solid #2A2A2A;
+      border: 1px solid #D5CCBF;
     }
     .slide-table th {
       font-size: 12px;
       font-weight: 600;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: #888;
+      color: #8A8279;
       text-align: left;
       padding: 18px 24px;
-      border-bottom: 1px solid #2A2A2A;
-      background: #0E0E0E;
+      border-bottom: 1px solid #D5CCBF;
+      background: #EDE7DD;
     }
     .slide-table td {
       font-size: 15px;
-      color: #C8C2B8;
+      color: #3D362E;
       padding: 16px 24px;
-      border-bottom: 1px solid #1A1A1A;
+      border-bottom: 1px solid #E3DDD4;
     }
     .slide-table tr:last-child td {
       border-bottom: none;
@@ -425,12 +426,12 @@
       -webkit-justify-content: space-between;
       justify-content: space-between;
       padding-top: 24px;
-      border-top: 1px solid #1A1A1A;
+      border-top: 1px solid #D5CCBF;
       margin-top: auto;
     }
     .footer-copyright {
       font-size: 13px;
-      color: #555;
+      color: #8A8279;
     }
     .footer-logo {
       font-family: 'Playfair Display', serif;

@@ -49,7 +49,7 @@
       width: 1080px;
       min-height: 1350px;
       font-family: 'Inter', sans-serif;
-      background: #EDE7DD;
+      background: #F5F1EB;
       color: #1A1714;
       -webkit-font-smoothing: antialiased;
     }
@@ -64,12 +64,34 @@
       -webkit-flex-direction: column;
       flex-direction: column;
       position: relative;
+      overflow: hidden;
     }
     .slide > * {
       margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
     }
     .slide > *:last-child {
       margin-bottom: 0;
+    }
+
+    /* ── Anthropic-style Decorative Graphics ── */
+    .deco-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .deco-bg svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
     }
 
     /* ── Series Label ──────────────────────── */
@@ -127,13 +149,13 @@
     .section-header-line {
       flex: 1;
       height: 1px;
-      background: #D5CCBF;
+      background: #DDD7CD;
     }
 
     /* ── Text Box ──────────────────────────── */
     .text-box {
-      background: #F7F3ED;
-      border: 1px solid #D5CCBF;
+      background: #FFFFFF;
+      border: 1px solid #E3DDD4;
       border-radius: 8px;
       padding: 28px 32px;
     }
@@ -172,8 +194,8 @@
       flex: 0 0 calc(50% - 10px);
     }
     .card {
-      background: #F7F3ED;
-      border: 1px solid #D5CCBF;
+      background: #FFFFFF;
+      border: 1px solid #E3DDD4;
       border-radius: 8px;
       padding: 24px 22px;
       display: -webkit-flex;
@@ -190,8 +212,8 @@
     .card-icon {
       width: 48px;
       height: 48px;
-      background: #EDE7DD;
-      border: 1px solid #D5CCBF;
+      background: #F5F1EB;
+      border: 1px solid #E3DDD4;
       border-radius: 10px;
       display: flex;
       align-items: center;
@@ -225,8 +247,8 @@
     .comparison-panel {
       -webkit-flex: 1;
       flex: 1;
-      background: #F7F3ED;
-      border: 1px solid #D5CCBF;
+      background: #FFFFFF;
+      border: 1px solid #E3DDD4;
       border-radius: 8px;
       padding: 28px 26px;
       display: -webkit-flex;
@@ -257,11 +279,11 @@
       width: fit-content;
     }
     .panel-badge.orange {
-      background: rgba(212, 104, 42, 0.12);
+      background: rgba(212, 104, 42, 0.10);
       color: #D4682A;
     }
     .panel-badge.teal {
-      background: rgba(61, 122, 116, 0.12);
+      background: rgba(61, 122, 116, 0.10);
       color: #3D7A74;
     }
     .panel-title {
@@ -353,7 +375,7 @@
       width: 28px;
       height: 28px;
       border-radius: 50%;
-      background: rgba(212, 104, 42, 0.12);
+      background: rgba(212, 104, 42, 0.10);
       color: #D4682A;
       font-size: 13px;
       font-weight: 700;
@@ -364,7 +386,7 @@
 
     /* ── Quote Block ───────────────────────── */
     .quote-block {
-      background: #F7F3ED;
+      background: #FFFFFF;
       border-left: 4px solid #D4682A;
       padding: 24px 28px;
       border-radius: 0 8px 8px 0;
@@ -388,10 +410,10 @@
     .slide-table {
       width: 100%;
       border-collapse: collapse;
-      background: #F7F3ED;
+      background: #FFFFFF;
       border-radius: 8px;
       overflow: hidden;
-      border: 1px solid #D5CCBF;
+      border: 1px solid #E3DDD4;
     }
     .slide-table th {
       font-size: 12px;
@@ -401,14 +423,14 @@
       color: #8A8279;
       text-align: left;
       padding: 18px 24px;
-      border-bottom: 1px solid #D5CCBF;
-      background: #EDE7DD;
+      border-bottom: 1px solid #E3DDD4;
+      background: #F5F1EB;
     }
     .slide-table td {
       font-size: 15px;
       color: #3D362E;
       padding: 16px 24px;
-      border-bottom: 1px solid #E3DDD4;
+      border-bottom: 1px solid #EDE9E2;
     }
     .slide-table tr:last-child td {
       border-bottom: none;
@@ -426,7 +448,7 @@
       -webkit-justify-content: space-between;
       justify-content: space-between;
       padding-top: 24px;
-      border-top: 1px solid #D5CCBF;
+      border-top: 1px solid #DDD7CD;
       margin-top: auto;
     }
     .footer-copyright {
@@ -446,6 +468,72 @@
   <!-- This template is rendered by build.js using data from slides.json -->
   <!-- Each section block is conditionally included based on slide data -->
   <div class="slide" id="slide">
+    <!-- Anthropic-style decorative background graphics -->
+    <div class="deco-bg">
+      <svg viewBox="0 0 1080 1350" xmlns="http://www.w3.org/2000/svg">
+        <!-- Top-right flowing curves (Anthropic neural-path style) -->
+        <path d="M 750 0 Q 850 80, 920 200 Q 990 320, 1020 450 Q 1050 580, 1080 650"
+              stroke="url(#grad-orange)" stroke-width="1.5" fill="none" opacity="0.25"/>
+        <path d="M 800 0 Q 900 100, 950 240 Q 1000 380, 1040 500 Q 1080 620, 1080 700"
+              stroke="url(#grad-orange)" stroke-width="1" fill="none" opacity="0.15"/>
+        <path d="M 850 0 Q 930 60, 980 180 Q 1030 300, 1060 400"
+              stroke="url(#grad-teal)" stroke-width="1" fill="none" opacity="0.18"/>
+
+        <!-- Bottom-left flowing curves -->
+        <path d="M 0 900 Q 60 950, 120 1020 Q 180 1090, 200 1200 Q 220 1310, 250 1350"
+              stroke="url(#grad-teal)" stroke-width="1.5" fill="none" opacity="0.22"/>
+        <path d="M 0 950 Q 80 1000, 150 1080 Q 220 1160, 260 1280 Q 300 1350, 320 1350"
+              stroke="url(#grad-teal)" stroke-width="1" fill="none" opacity="0.14"/>
+        <path d="M 0 1000 Q 40 1060, 80 1150 Q 120 1240, 160 1350"
+              stroke="url(#grad-orange)" stroke-width="1" fill="none" opacity="0.15"/>
+
+        <!-- Dot constellation - top right area -->
+        <circle cx="920" cy="60" r="2.5" fill="#D4682A" opacity="0.18"/>
+        <circle cx="960" cy="90" r="1.5" fill="#D4682A" opacity="0.12"/>
+        <circle cx="940" cy="130" r="2" fill="#3D7A74" opacity="0.15"/>
+        <circle cx="1000" cy="80" r="1.5" fill="#D4682A" opacity="0.10"/>
+        <circle cx="980" cy="150" r="2" fill="#3D7A74" opacity="0.12"/>
+        <circle cx="1020" cy="120" r="1.5" fill="#D4682A" opacity="0.14"/>
+        <circle cx="1040" cy="170" r="2.5" fill="#3D7A74" opacity="0.10"/>
+        <circle cx="900" cy="180" r="1.5" fill="#D4682A" opacity="0.10"/>
+
+        <!-- Dot constellation - bottom left area -->
+        <circle cx="60" cy="1180" r="2.5" fill="#3D7A74" opacity="0.18"/>
+        <circle cx="100" cy="1210" r="1.5" fill="#3D7A74" opacity="0.12"/>
+        <circle cx="40" cy="1240" r="2" fill="#D4682A" opacity="0.15"/>
+        <circle cx="120" cy="1250" r="1.5" fill="#3D7A74" opacity="0.10"/>
+        <circle cx="80" cy="1280" r="2" fill="#D4682A" opacity="0.12"/>
+        <circle cx="140" cy="1290" r="1.5" fill="#3D7A74" opacity="0.14"/>
+        <circle cx="50" cy="1310" r="2.5" fill="#D4682A" opacity="0.10"/>
+
+        <!-- Subtle radial glow - top right -->
+        <radialGradient id="glow-tr" cx="95%" cy="5%" r="30%">
+          <stop offset="0%" stop-color="#D4682A" stop-opacity="0.06"/>
+          <stop offset="100%" stop-color="#D4682A" stop-opacity="0"/>
+        </radialGradient>
+        <rect x="0" y="0" width="1080" height="1350" fill="url(#glow-tr)"/>
+
+        <!-- Subtle radial glow - bottom left -->
+        <radialGradient id="glow-bl" cx="5%" cy="90%" r="25%">
+          <stop offset="0%" stop-color="#3D7A74" stop-opacity="0.05"/>
+          <stop offset="100%" stop-color="#3D7A74" stop-opacity="0"/>
+        </radialGradient>
+        <rect x="0" y="0" width="1080" height="1350" fill="url(#glow-bl)"/>
+
+        <!-- Gradient definitions for strokes -->
+        <defs>
+          <linearGradient id="grad-orange" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#D4682A" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#D4682A" stop-opacity="0.1"/>
+          </linearGradient>
+          <linearGradient id="grad-teal" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#3D7A74" stop-opacity="0.5"/>
+            <stop offset="100%" stop-color="#3D7A74" stop-opacity="0.1"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+
     <!-- Content injected by build script -->
   </div>
 </body>

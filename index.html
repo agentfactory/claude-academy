@@ -125,7 +125,7 @@
     .split-img { flex-shrink: 0; overflow: hidden; }
     .split-content {
       display: flex; flex-direction: column; justify-content: center;
-      gap: 28px; padding: 80px; flex: 1;
+      gap: 28px; padding: 60px 80px; flex: 1;
     }
     .label-row {
       display: flex; align-items: center; gap: 10px;
@@ -151,11 +151,11 @@
     .intro .split-content { gap: 28px; }
 
     /* ── Services ───────────────────────────── */
-    .svc { height: 560px; }
+    .svc { height: 480px; }
     .svc-1 { background: #111111; }
     .svc-2 { background: #161616; flex-direction: row-reverse; }
     .svc-3 { background: #111111; }
-    .svc .split-img { width: 640px; height: 560px; }
+    .svc .split-img { width: 640px; height: 480px; }
     .svc-2 .split-img { width: 600px; }
     .svc .section-h2 { font-size: clamp(28px, 3.6vw, 52px); color: #F5F0E8; }
 
@@ -220,7 +220,7 @@
     /* ── Freebie ────────────────────────────── */
     .freebie {
       background: #0D0D0D;
-      padding: 80px;
+      padding: 60px 80px;
       display: flex; flex-direction: column; gap: 48px;
     }
     .freebie-inner {
@@ -275,11 +275,12 @@
     .post-col { flex: 1; display: flex; flex-direction: column; gap: 8px; }
     .post-title { font-size: 15px; font-weight: 600; color: #F5F0E8; line-height: 1.4; }
     .post-link { font-size: 12px; color: #D4682A; letter-spacing: 1px; }
+    .post-link-soon { font-size: 12px; color: #333; letter-spacing: 1px; }
 
     /* ── Closing CTA ─────────────────────────── */
     .closing-cta {
       background: #0D0D0D;
-      padding: 100px 80px;
+      padding: 72px 80px;
       display: flex; flex-direction: column;
       align-items: center; gap: 28px;
       text-align: center;
@@ -601,18 +602,6 @@
   </div>
 </section>
 
-<!-- ─── ABOUT ──────────────────────────────── -->
-<section class="split-section about">
-  <div class="split-img" style="width:600px;">
-    <img src="images/Portrait_01.jpg" alt="Denis Laflamme portrait" loading="lazy">
-  </div>
-  <div class="split-content" style="gap:32px;">
-    <p class="about-pull">"Claude specialist meets business systems thinker — with real operator experience and zero hype."</p>
-    <div class="about-divider"></div>
-    <p class="about-body">I'm Denis Laflamme, and I help SMB owners and their teams build smarter, leaner, more profitable businesses through Claude-first consulting, workshops, and systems strategy. Whether it's turning your SOPs into intelligent Claude agents, your client intake into automated workflows, or your expertise into a scalable AI system — I help you leverage Claude to amplify what already works.<br><br>You don't need to become a prompt engineer. You need Claude systems built around how you already operate.</p>
-  </div>
-</section>
-
 <!-- ─── TESTIMONIALS ──────────────────────── -->
 <section class="testimonials">
   <div class="testimonials-photo">
@@ -685,14 +674,14 @@
       <span class="post-num">02</span>
       <div class="post-col">
         <p class="post-title">5 Claude Agents Every SMB Should Build This Quarter</p>
-        <a href="#" class="post-link">Read here →</a>
+        <span class="post-link-soon">Coming Soon</span>
       </div>
     </div>
     <div class="blog-post">
       <span class="post-num">03</span>
       <div class="post-col">
         <p class="post-title">Stop Using ChatGPT Like Google — Here's How Claude Actually Transforms Operations</p>
-        <a href="#" class="post-link">Read here →</a>
+        <span class="post-link-soon">Coming Soon</span>
       </div>
     </div>
   </div>

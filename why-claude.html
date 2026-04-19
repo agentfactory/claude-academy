@@ -322,18 +322,45 @@
     .popup-submit:hover { opacity: .88; transform: translateY(-1px); }
     .popup-footer { font-size: 12px; color: #999; text-align: center; line-height: 1.5; }
 
-    /* ── Responsive ──────────────────────────── */
+    /* ── Tablet ───────────────────────────────── */
+    @media (max-width: 1024px) {
+      header { padding: 0 32px; }
+      .article-hero { padding: 80px 32px 64px; }
+      .article-section { padding: 64px 32px; }
+      .pullquote-section { padding: 64px 32px; }
+      footer { padding: 48px 32px; }
+      .sticky-banner { padding: 0 32px; }
+    }
+
+    /* ── Mobile ───────────────────────────────── */
     @media (max-width: 768px) {
-      header { padding: 0 24px; }
-      .article-hero { padding: 60px 24px 48px; }
-      .article-section { padding: 48px 24px; }
+      header { padding: 0 20px; height: 64px; }
+      nav { display: none; }
+      .nav-right .social-icon { display: none; }
+
+      .article-hero { padding: 60px 20px 40px; }
+      .article-title { font-size: clamp(28px, 7vw, 48px); }
+
+      .article-section { padding: 40px 20px; }
+      .article-blockquote { padding: 24px; font-size: 15px; }
       .feature-cards { grid-template-columns: 1fr; }
       .comparison-grid { grid-template-columns: 1fr; }
-      .pullquote-section { padding: 48px 24px; }
-      footer { padding: 48px 24px; }
-      .sticky-banner { padding: 0 24px; }
-      .footer-top { flex-direction: column; align-items: center; text-align: center; }
-      nav { display: none; }
+
+      .pullquote-section { padding: 40px 20px; }
+      .pullquote-text { font-size: clamp(18px, 4.5vw, 24px); }
+      .section-divider { margin-bottom: 40px !important; margin-top: 40px !important; }
+
+      footer { padding: 32px 20px; }
+      .footer-top { flex-direction: column; align-items: center; text-align: center; gap: 32px; }
+      .footer-contact { width: 100%; text-align: center; }
+
+      .sticky-banner { padding: 0 16px; height: 56px; }
+      .banner-txt { font-size: 12px; }
+      .banner-btn { padding: 8px 16px; font-size: 11px; }
+      body { padding-bottom: 56px; }
+
+      .popup-card { padding: 28px 24px; margin: 16px; }
+      .popup-heading { font-size: 28px; }
     }
   </style>
 </head>

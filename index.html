@@ -125,7 +125,7 @@
     .split-img { flex-shrink: 0; overflow: hidden; }
     .split-content {
       display: flex; flex-direction: column; justify-content: center;
-      gap: 28px; padding: 80px; flex: 1;
+      gap: 28px; padding: 60px 80px; flex: 1;
     }
     .label-row {
       display: flex; align-items: center; gap: 10px;
@@ -151,11 +151,11 @@
     .intro .split-content { gap: 28px; }
 
     /* ── Services ───────────────────────────── */
-    .svc { height: 560px; }
+    .svc { height: 480px; }
     .svc-1 { background: #111111; }
     .svc-2 { background: #161616; flex-direction: row-reverse; }
     .svc-3 { background: #111111; }
-    .svc .split-img { width: 640px; height: 560px; }
+    .svc .split-img { width: 640px; height: 480px; }
     .svc-2 .split-img { width: 600px; }
     .svc .section-h2 { font-size: clamp(28px, 3.6vw, 52px); color: #F5F0E8; }
 
@@ -220,7 +220,7 @@
     /* ── Freebie ────────────────────────────── */
     .freebie {
       background: #0D0D0D;
-      padding: 80px;
+      padding: 60px 80px;
       display: flex; flex-direction: column; gap: 48px;
     }
     .freebie-inner {
@@ -275,11 +275,12 @@
     .post-col { flex: 1; display: flex; flex-direction: column; gap: 8px; }
     .post-title { font-size: 15px; font-weight: 600; color: #F5F0E8; line-height: 1.4; }
     .post-link { font-size: 12px; color: #D4682A; letter-spacing: 1px; }
+    .post-link-soon { font-size: 12px; color: #333; letter-spacing: 1px; }
 
     /* ── Closing CTA ─────────────────────────── */
     .closing-cta {
       background: #0D0D0D;
-      padding: 100px 80px;
+      padding: 72px 80px;
       display: flex; flex-direction: column;
       align-items: center; gap: 28px;
       text-align: center;
@@ -428,6 +429,67 @@
     .popup-footer {
       font-size: 12px; color: #999; text-align: center; line-height: 1.5;
     }
+
+    /* ── Mobile / Tablet ───────────────────────── */
+    @media (max-width: 1024px) {
+      header { padding: 0 32px; }
+      .hero { padding: 48px 32px 0; }
+      .split-content { padding: 48px 32px; }
+      .testimonials { padding: 48px 32px; gap: 32px; }
+      .freebie { padding: 48px 32px; }
+      .blog { padding: 48px 32px; gap: 40px; }
+      .closing-cta { padding: 64px 32px; }
+      footer { padding: 48px 32px; }
+      .sticky-banner { padding: 0 32px; }
+      .svc .split-img, .svc-2 .split-img { width: 400px; }
+      .intro .split-img { width: 360px; }
+      .about .split-img { width: 400px; }
+    }
+
+    @media (max-width: 768px) {
+      header { padding: 0 20px; height: 64px; }
+      nav { display: none; }
+      .nav-right .social-icon { display: none; }
+
+      .hero { padding: 32px 20px 0; }
+      .hero-type .claude-word { font-size: clamp(60px, 16vw, 120px); letter-spacing: -3px; }
+      .hero-type .academy-word { font-size: clamp(56px, 15vw, 115px); letter-spacing: -3px; }
+      .hero-photo { height: 200px; }
+      .hero-bottom { flex-direction: column; align-items: flex-start; gap: 20px; padding: 24px 0 40px; }
+
+      .split-section { flex-direction: column !important; }
+      .split-img, .intro .split-img, .svc .split-img, .svc-2 .split-img, .about .split-img {
+        width: 100% !important; height: 300px !important;
+      }
+      .split-content { padding: 32px 20px; }
+      .intro, .svc, .about { height: auto; }
+
+      .testimonials { flex-direction: column; height: auto; padding: 32px 20px; }
+      .testimonials-photo { width: 100%; height: 240px; }
+
+      .freebie { padding: 32px 20px; }
+      .freebie-inner { flex-direction: column; gap: 32px; }
+      .freebie-img { width: 100%; height: 240px; }
+
+      .blog { flex-direction: column; padding: 32px 20px; gap: 24px; }
+      .blog-left { width: 100%; }
+      .blog-desc { width: 100%; }
+      .blog-post { padding: 20px; gap: 16px; }
+      .post-num { font-size: 28px; }
+
+      .closing-cta { padding: 48px 20px; }
+      footer { padding: 32px 20px; }
+      .footer-top { flex-direction: column; align-items: center; text-align: center; gap: 32px; }
+      .footer-contact { width: 100%; text-align: center; }
+
+      .sticky-banner { padding: 0 16px; height: 56px; }
+      .banner-txt { font-size: 12px; }
+      .banner-btn { padding: 8px 16px; font-size: 11px; }
+      body { padding-bottom: 56px; }
+
+      .popup-card { padding: 28px 24px; margin: 16px; }
+      .popup-heading { font-size: 28px; }
+    }
   </style>
 </head>
 <body>
@@ -540,18 +602,6 @@
   </div>
 </section>
 
-<!-- ─── ABOUT ──────────────────────────────── -->
-<section class="split-section about">
-  <div class="split-img" style="width:600px;">
-    <img src="images/Portrait_01.jpg" alt="Denis Laflamme portrait" loading="lazy">
-  </div>
-  <div class="split-content" style="gap:32px;">
-    <p class="about-pull">"Claude specialist meets business systems thinker — with real operator experience and zero hype."</p>
-    <div class="about-divider"></div>
-    <p class="about-body">I'm Denis Laflamme, and I help SMB owners and their teams build smarter, leaner, more profitable businesses through Claude-first consulting, workshops, and systems strategy. Whether it's turning your SOPs into intelligent Claude agents, your client intake into automated workflows, or your expertise into a scalable AI system — I help you leverage Claude to amplify what already works.<br><br>You don't need to become a prompt engineer. You need Claude systems built around how you already operate.</p>
-  </div>
-</section>
-
 <!-- ─── TESTIMONIALS ──────────────────────── -->
 <section class="testimonials">
   <div class="testimonials-photo">
@@ -624,14 +674,14 @@
       <span class="post-num">02</span>
       <div class="post-col">
         <p class="post-title">5 Claude Agents Every SMB Should Build This Quarter</p>
-        <a href="#" class="post-link">Read here →</a>
+        <span class="post-link-soon">Coming Soon</span>
       </div>
     </div>
     <div class="blog-post">
       <span class="post-num">03</span>
       <div class="post-col">
         <p class="post-title">Stop Using ChatGPT Like Google — Here's How Claude Actually Transforms Operations</p>
-        <a href="#" class="post-link">Read here →</a>
+        <span class="post-link-soon">Coming Soon</span>
       </div>
     </div>
   </div>

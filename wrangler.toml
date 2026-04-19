@@ -1,6 +1,6 @@
 name = "claude-academy"
 main = "worker.js"
 compatibility_date = "2024-01-01"
-account_id = "fbe1ce4d9a4ee068fd4fd4bb10b68611"
+account_id = "8a57c605a2514dc39c63e80531633a7e"
 
 # To add custom domain: Cloudflare Dashboard → Workers → claude-academy → Settings → Domains & Routes

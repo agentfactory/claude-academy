@@ -14,6 +14,7 @@ const BASE_DIR = __dirname;
 const ROUTES = {
   '/': 'index.html',
   '/why-claude': 'why-claude.html',
+  '/it': 'it/index.html',
 };
 
 // Read and transform each page

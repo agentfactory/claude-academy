@@ -32,6 +32,11 @@ export default {
   async fetch(request) {
     const url = new URL(request.url);
 
+    // Redirect www to apex
+    if (url.hostname === 'www.claudeacademy.ca') {
+      return Response.redirect('https://claudeacademy.ca' + url.pathname + url.search, 301);
+    }
+
     // Redirect bare /index.html to /
     if (url.pathname === '/index.html') {
       return Response.redirect(url.origin + '/', 301);
